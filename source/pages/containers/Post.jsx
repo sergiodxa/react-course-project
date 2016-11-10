@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 
 
-class About extends Component {
+class Post extends Component {
   render() {
     return (
       <section name="home">
-        <h1>About</h1>
+        <h1>Post</h1>
         <Link to="/">
           Go to home
-        </Link>
-        <Link to="/random">
-          Go to random
         </Link>
       </section>
     );
@@ -19,4 +16,4 @@ class About extends Component {
 }
 
 
-export default About;
+export default Post;
