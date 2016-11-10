@@ -5,6 +5,7 @@
   "main": "webpack.config.js",
   "dependencies": {
     "isomorphic-fetch": "2.2.1",
+    "list": "0.8.2",
     "react": "15.3.2",
     "react-dom": "15.3.2",
     "react-router": "4.0.0-alpha.5"
@@ -21,7 +22,8 @@
     "webpack": "1.13.3"
   },
   "scripts": {
-    "start": "node built/server/index.js"
+    "bff": "node ./built/server/index.js",
+    "sfs": "list ./built/statics --port 3001"
   },
   "repository": {
     "type": "git",
