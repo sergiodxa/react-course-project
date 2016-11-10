@@ -14,11 +14,15 @@ function Layout(props) {
         <title>{props.title}</title>
         <meta charSet="utf-8" />
       </head>
-      <body
-        dangerouslySetInnerHTML={{
-          __html: props.content,
-        }}
-      />
+      <body>
+        <div
+          id="render-target"
+          dangerouslySetInnerHTML={{
+            __html: props.content,
+          }}
+        />
+        <script src="http://localhost:3001/app.js" />
+      </body>
     </html>
   );
 }
