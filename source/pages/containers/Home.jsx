@@ -3,12 +3,15 @@ import { Link } from 'react-router';
 
 import api from '../../api.js';
 
+import Post from '../../posts/containers/Post.jsx';
+
 
 class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      loading: true,
       posts: [],
       page: 1,
     };
@@ -17,7 +20,9 @@ class Home extends Component {
   async componentDidMount() {
     const posts = await api.posts.getList(this.state.page);
     this.setState({
-      posts, page: this.state.page + 1,
+      posts,
+      page: this.state.page + 1,
+      loading: false,
     });
   }
 
@@ -25,6 +30,16 @@ class Home extends Component {
     return (
       <section name="home">
         <h1>Home</h1>
+
+        <section>
+          {this.state.loading && (
+            <h2>Loading posts...</h2>
+          )}
+          {this.state.posts
+            .map(post => <Post key={post.id} {...post} />)
+          }
+        </section>
+
         <Link to="/post/1">
           Go to post
         </Link>
