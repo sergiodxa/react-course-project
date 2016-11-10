@@ -23,7 +23,7 @@
   },
   "scripts": {
     "bff": "node ./built/server/index.js",
-    "sfs": "list ./built/statics --port 3001"
+    "sfs": "list ./built/statics --port 3001 --cache 0"
   },
   "repository": {
     "type": "git",
