@@ -1,0 +1,26 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "Proyecto para el curso de React.js",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "isomorphic-fetch": "2.2.1",
+    "react": "15.3.2",
+    "react-dom": "15.3.2"
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergiodxa/react-course-project.git"
+  },
+  "keywords": [],
+  "author": "Sergio Daniel Xalambrí <sergio@xalambri.com.ar> (http://sergio.xalambri.com.ar/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sergiodxa/react-course-project/issues"
+  },
+  "homepage": "https://github.com/sergiodxa/react-course-project#readme"
+}
