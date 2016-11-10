@@ -1,8 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
+import api from '../../api.js';
+
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      posts: [],
+      page: 1,
+    };
+  }
+
+  async componentDidMount() {
+    const posts = await api.posts.getList(this.state.page);
+    this.setState({
+      posts, page: this.state.page + 1,
+    });
+  }
+
   render() {
     return (
       <section name="home">
