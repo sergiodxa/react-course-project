@@ -9,8 +9,15 @@
     "react-dom": "15.3.2"
   },
   "devDependencies": {
+    "babel-core": "6.18.2",
+    "babel-loader": "6.2.7",
+    "babel-preset-latest-minimal": "1.1.2",
+    "babel-preset-react": "6.16.0",
+    "json-loader": "0.5.4",
+    "webpack": "1.13.3"
   },
   "scripts": {
+    "start": "node built/server/index.js"
   },
   "repository": {
     "type": "git",
