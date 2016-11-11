@@ -11,23 +11,25 @@ class Post extends Component {
     this.state = {
       loading: true,
       user: props.user || null,
-      comments: [],
+      comments: props.comments || null,
     };
   }
 
   async componentDidMount() {
+    if (!!this.state.user && !!this.state.comments) return this.setState({ loading: false });
+
     const [
       user,
       comments,
     ] = await Promise.all([
       !this.state.user ? api.users.getSingle(this.props.userId) : Promise.resolve(null),
-      api.posts.getComments(this.props.id),
+      !this.state.comments ? api.posts.getComments(this.props.id) : Promise.resolve(null),
     ]);
 
     this.setState({
       loading: false,
       user: user || this.state.user,
-      comments,
+      comments: comments || this.state.comments,
     });
   }
 
