@@ -39,9 +39,9 @@ function requestHandler(request, response) {
   }
 
   response.write(
-    renderToStaticMarkup(
+    `<!doctype html>${renderToStaticMarkup(
       <Layout title="Aplicación" content={html} />
-    )
+    )}`
   );
 
   return response.end();

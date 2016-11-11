@@ -39,13 +39,6 @@ class Home extends Component {
             .map(post => <Post key={post.id} {...post} />)
           }
         </section>
-
-        <Link to="/post/1">
-          Go to post
-        </Link>
-        <Link to="/user/1">
-          Go to profile
-        </Link>
       </section>
     );
   }
