@@ -1,11 +1,11 @@
 import http from 'http';
 import React from 'react';
-import { renderToString, renderToStaticMarkup } from 'react-dom/server';
+import { renderToString } from 'react-dom/server';
 import { ServerRouter, createServerRenderContext } from 'react-router';
 
-import Layout from './pages/components/Layout';
 import Pages from './pages/index';
 
+import layout from './layout.html';
 
 function requestHandler(request, response) {
   const context = createServerRenderContext();
@@ -38,9 +38,7 @@ function requestHandler(request, response) {
   }
 
   response.write(
-    `<!doctype html>${renderToStaticMarkup(
-      <Layout title="Aplicación" content={html} />,
-    )}`,
+    layout({ content: html, title: 'Aplicación' }),
   );
 
   return response.end();

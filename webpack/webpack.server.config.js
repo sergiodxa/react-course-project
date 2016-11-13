@@ -16,6 +16,10 @@ module.exports = {
     ],
     loaders: [
       {
+        test: /\.html$/,
+        loader: 'template-string',
+      },
+      {
         test: /\.json$/,
         loader: 'json',
       },
