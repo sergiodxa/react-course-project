@@ -3,6 +3,9 @@ import { Link } from 'react-router';
 
 import Post from '../../posts/containers/Post.jsx';
 import Loading from '../../shared/components/Loading.jsx';
+import Title from '../../shared/components/Title.jsx';
+
+import styles from './Page.css';
 
 import api from '../../api.js';
 
@@ -41,25 +44,28 @@ class Profile extends Component {
 
     return (
       <section name="home">
-        <h2>Profile of {this.state.user.name}</h2>
+        <Title>
+          Profile of {this.state.user.name}
+        </Title>
 
-        <fieldset>
-          <legend>Basic info</legend>
-          <input type="email" value={this.state.user.email} disabled />
-        </fieldset>
+        <section id="profile" className={styles.main}>
+          <fieldset className={styles.field}>
+            <legend>Basic info</legend>
+            <label>Email:</label>
+            <input type="email" value={this.state.user.email} disabled />
+          </fieldset>
 
-        {this.state.user.address && (
-          <fieldset>
+          <fieldset className={styles.field}>
             <legend>Address</legend>
-            <addres>
+            <address>
               {this.state.user.address.street}<br />
               {this.state.user.address.suite}<br />
               {this.state.user.address.city}<br />
               {this.state.user.address.zipcode}<br />
-            </addres>
+            </address>
           </fieldset>
-        )}
-        <section>
+        </section>
+        <section className={styles.list}>
           {this.state.posts
             .map(post => <Post key={post.id} {...post} user={this.state.user} />)
           }

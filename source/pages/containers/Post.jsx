@@ -5,6 +5,8 @@ import PostBody from '../../posts/containers/Post.jsx';
 import Loading from '../../shared/components/Loading.jsx';
 import Comment from '../../comments/containers/Comment.jsx';
 
+import styles from './Page.css';
+
 import api from '../../api.js';
 
 
@@ -43,13 +45,16 @@ class Post extends Component {
     }
 
     return (
-      <section name="post">
-        <PostBody
-          {...this.state.post}
-          user={this.state.user}
-          comments={this.state.comments}
-        />
-        <section id="comments">
+      <section name="post" className={styles.section}>
+        <section className={styles.main}>
+          <PostBody
+            isMain
+            {...this.state.post}
+            user={this.state.user}
+            comments={this.state.comments}
+          />
+        </section>
+        <section id="comments" className={styles.list}>
           {this.state.comments
             .map(comment =>
               <Comment key={comment.id} {...comment} />

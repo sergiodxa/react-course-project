@@ -1,0 +1,46 @@
+.header {
+  background: linear-gradient(90deg,#1c3643 0,#273b47 25%,#1e5372);
+}
+
+.title {
+  color: #fff;
+  flex-shrink: 0;
+  font-size: 2em;
+  font-weight: normal;
+  margin: 0;
+
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: .5em 1em;
+  width: 100%;
+}
+
+.navigation {
+  display: flex;
+  padding: 1em;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  transition: all .3s;
+  border: 1px solid white;
+  border-radius: .25em;
+  padding: .25em .5em;
+  margin: 0 .5em;
+}
+.link:first-of-type {
+  margin-left: 0;
+}
+.link:last-of-type {
+  margin-right: 0;
+}
+.link:hover {
+  background-color: white;
+  color: black;
+  transform: scale(1.01);
+}

@@ -1,0 +1,30 @@
+.section {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.list {
+  margin: 1em;
+}
+
+.main {
+  margin: 1em;
+}
+
+.field {
+  margin: 1em 0;
+}
+
+.field legend {
+  font-size: 1.125em;
+}
+
+.field input {
+  border: none;
+  color: black;
+  padding: .25em .5em;
+}
+
+.field address {
+  padding-left: 1em;
+}

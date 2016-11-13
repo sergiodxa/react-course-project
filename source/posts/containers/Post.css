@@ -1,0 +1,38 @@
+.post {
+  border-radius: .5em;
+  box-shadow: 0 0 .5em black;
+  padding: 1em;
+  margin: 2em 0;
+  transition: all .3s;
+}
+.post:hover {
+  transform: scale(1.01);
+}
+
+.title {
+  margin: 0;
+}
+.title a {
+  color: black;
+  text-decoration: none;
+}
+
+.body {}
+
+.meta {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user {}
+
+.comments {}
+
+@media (max-width: 1000px) {
+  .meta {
+    flex-direction: column;
+  }
+  .meta * {
+    margin: .25em 0;
+  }
+}

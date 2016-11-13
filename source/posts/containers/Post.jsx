@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
+import styles from './Post.css';
+
 import api from '../../api.js';
 
 
@@ -35,23 +37,29 @@ class Post extends Component {
 
   render() {
     return (
-      <article id={`post-${this.props.id}`}>
-        <h2>
+      <article id={`post-${this.props.id}`} className={styles.post}>
+        <h2 className={styles.title}>
           <Link to={`/post/${this.props.id}`}>
             {this.props.title}
           </Link>
         </h2>
-        <p>
+        <p className={styles.body}>
           {this.props.body}
         </p>
         {!this.state.loading && (
-          <div>
-            <Link to={`/user/${this.state.user.id}`}>
+          <div className={styles.meta}>
+            <Link to={`/user/${this.state.user.id}`} className={styles.user}>
               {this.state.user.name}
             </Link>
-            <span>
-              Hay {this.state.comments.length} comentarios
-            </span>
+            <Link to={`/post/${this.props.id}#comments`} className={styles.comments}>
+              {this.state.comments.length} comments
+            </Link>
+
+            {!this.props.isMain && (
+              <Link to={`/post/${this.props.id}`}>
+                Read more...
+              </Link>
+            )}
           </div>
         )}
       </article>
@@ -65,6 +73,11 @@ Post.propTypes = {
   userId: PropTypes.number,
   title: PropTypes.string,
   body: PropTypes.string,
+  isMain: PropTypes.bool,
+};
+
+Post.defaultProps = {
+  isMain: false,
 };
 
 

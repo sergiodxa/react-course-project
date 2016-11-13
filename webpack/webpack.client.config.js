@@ -1,3 +1,5 @@
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {
   entry: './source/client.js',
   output: {
@@ -20,7 +22,14 @@ module.exports = {
           plugins: ['transform-es2015-modules-commonjs'],
         },
       },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style', 'css?modules'),
+      },
     ],
   },
   target: 'web',
+  plugins: [
+    new ExtractTextPlugin('../statics/styles.css'),
+  ],
 };

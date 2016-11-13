@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 
-import api from '../../api.js';
-
 import Post from '../../posts/containers/Post.jsx';
 import Loading from '../../shared/components/Loading.jsx';
+import Title from '../../shared/components/Title.jsx';
+
+import styles from './Page.css';
+
+import api from '../../api.js';
 
 
 class Home extends Component {
@@ -65,10 +68,12 @@ class Home extends Component {
 
   render() {
     return (
-      <section name="home">
-        <h1>Home</h1>
+      <section name="home" className={styles.section}>
+        <Title>
+          Home
+        </Title>
 
-        <section>
+        <section className={styles.list}>
           {this.state.posts
             .map(post => <Post key={post.id} {...post} />)
           }
