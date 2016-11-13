@@ -1,11 +1,10 @@
 import http from 'http';
-import fetch from 'isomorphic-fetch';
 import React from 'react';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { ServerRouter, createServerRenderContext } from 'react-router';
 
-import Layout from './pages/components/Layout.jsx';
-import Pages from './pages/index.js';
+import Layout from './pages/components/Layout';
+import Pages from './pages/index';
 
 
 function requestHandler(request, response) {
@@ -14,7 +13,7 @@ function requestHandler(request, response) {
   let html = renderToString(
     <ServerRouter location={request.url} context={context}>
       <Pages />
-    </ServerRouter>
+    </ServerRouter>,
   );
 
   const result = context.getResult();
@@ -34,14 +33,14 @@ function requestHandler(request, response) {
     html = renderToString(
       <ServerRouter location={request.url} context={context}>
         <Pages />
-      </ServerRouter>
+      </ServerRouter>,
     );
   }
 
   response.write(
     `<!doctype html>${renderToStaticMarkup(
-      <Layout title="Aplicación" content={html} />
-    )}`
+      <Layout title="Aplicación" content={html} />,
+    )}`,
   );
 
   return response.end();

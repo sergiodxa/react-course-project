@@ -9,7 +9,7 @@ const propTypes = {
 
 function Layout(props) {
   return (
-    <html>
+    <html lang="es">
       <head>
         <title>{props.title}</title>
         <meta charSet="utf-8" />

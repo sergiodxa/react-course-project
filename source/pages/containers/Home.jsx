@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 
-import Post from '../../posts/containers/Post.jsx';
-import Loading from '../../shared/components/Loading.jsx';
-import Title from '../../shared/components/Title.jsx';
+import Post from '../../posts/containers/Post';
+import Loading from '../../shared/components/Loading';
+import Title from '../../shared/components/Title';
 
 import styles from './Page.css';
 
-import api from '../../api.js';
+import api from '../../api';
 
 
 class Home extends Component {
@@ -18,19 +17,14 @@ class Home extends Component {
       loading: true,
       posts: [],
       page: 1,
+      error: null,
     };
 
     this.handleScroll = this.handleScroll.bind(this);
   }
 
-  async componentDidMount() {
-    const posts = await api.posts.getList(this.state.page);
-    this.setState({
-      posts,
-      page: this.state.page + 1,
-      loading: false,
-    });
-
+  componentDidMount() {
+    this.initialFetch();
     window.addEventListener('scroll', this.handleScroll);
   }
 
@@ -38,7 +32,16 @@ class Home extends Component {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
-  handleScroll(event) {
+  async initialFetch() {
+    const posts = await api.posts.getList(this.state.page);
+    this.setState({
+      posts,
+      page: this.state.page + 1,
+      loading: false,
+    });
+  }
+
+  handleScroll() {
     if (this.state.loading) return null;
 
     const scrolled = window.scrollY;
@@ -49,7 +52,7 @@ class Home extends Component {
       return null;
     }
 
-    this.setState({ loading: true }, async () => {
+    return this.setState({ loading: true }, async () => {
       try {
         const posts = await api.posts.getList(this.state.page);
 
@@ -57,11 +60,13 @@ class Home extends Component {
           posts: this.state.posts.concat(posts),
           page: this.state.page + 1,
           loading: false,
+          error: null,
         });
       } catch (error) {
-        console.error(error);
-
-        this.setState({ loading: false });
+        this.setState({
+          loading: false,
+          error: error.message,
+        });
       }
     });
   }
@@ -79,6 +84,9 @@ class Home extends Component {
           }
           {this.state.loading && (
             <Loading />
+          )}
+          {this.state.error && (
+            <h4>{this.state.error}</h4>
           )}
         </section>
       </section>

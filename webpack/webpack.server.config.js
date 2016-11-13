@@ -1,12 +1,19 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: './source/server.js',
+  entry: './source/server.jsx',
   output: {
     filename: 'index.js',
     path: './built/server',
   },
   module: {
+    preLoaders: [
+      {
+        test: /\.jsx?$/,
+        loader: 'eslint',
+        exclude: /node_modules/,
+      },
+    ],
     loaders: [
       {
         test: /\.json$/,
@@ -26,8 +33,16 @@ module.exports = {
       },
     ],
   },
+  resolve: {
+    extensions: ['', '.js', '.jsx', '.css'],
+  },
   target: 'node',
   plugins: [
     new ExtractTextPlugin('../statics/styles.css'),
   ],
+  eslint: {
+    configFile: './.eslintrc',
+    emitError: true,
+    emitWarning: true,
+  },
 };

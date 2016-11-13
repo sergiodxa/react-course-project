@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 
 import styles from './Comment.css';
 
@@ -16,6 +16,14 @@ function Comment(props) {
     </article>
   );
 }
+
+
+Comment.propTypes = {
+  id: PropTypes.number.isRequired,
+  body: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+};
 
 
 export default Comment;

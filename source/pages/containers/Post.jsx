@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+import React, { Component, PropTypes } from 'react';
 
-import PostBody from '../../posts/containers/Post.jsx';
-import Loading from '../../shared/components/Loading.jsx';
-import Comment from '../../comments/containers/Comment.jsx';
+import PostBody from '../../posts/containers/Post';
+import Loading from '../../shared/components/Loading';
+import Comment from '../../comments/containers/Comment';
 
 import styles from './Page.css';
 
-import api from '../../api.js';
+import api from '../../api';
 
 
 class Post extends Component {
@@ -22,10 +21,14 @@ class Post extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.initialFetch();
+  }
+
+  async initialFetch() {
     const [
       post,
-      comments
+      comments,
     ] = await Promise.all([
       api.posts.getSingle(this.props.params.id),
       api.posts.getComments(this.props.params.id),
@@ -35,7 +38,9 @@ class Post extends Component {
 
     this.setState({
       loading: false,
-      post, user, comments,
+      post,
+      user,
+      comments,
     });
   }
 
@@ -56,15 +61,22 @@ class Post extends Component {
         </section>
         <section id="comments" className={styles.list}>
           {this.state.comments
-            .map(comment =>
+            .map(comment => (
               <Comment key={comment.id} {...comment} />
-            )
+            ))
           }
         </section>
       </section>
     );
   }
 }
+
+
+Post.propTypes = {
+  params: PropTypes.shape({
+    id: PropTypes.string,
+  }),
+};
 
 
 export default Post;

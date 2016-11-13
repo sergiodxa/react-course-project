@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+import React, { Component, PropTypes } from 'react';
 
-import Post from '../../posts/containers/Post.jsx';
-import Loading from '../../shared/components/Loading.jsx';
-import Title from '../../shared/components/Title.jsx';
+import Post from '../../posts/containers/Post';
+import Loading from '../../shared/components/Loading';
+import Title from '../../shared/components/Title';
 
 import styles from './Page.css';
 
-import api from '../../api.js';
+import api from '../../api';
 
 
 class Profile extends Component {
@@ -21,7 +20,11 @@ class Profile extends Component {
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.initialFetch();
+  }
+
+  async initialFetch() {
     const [
       user,
       posts,
@@ -39,7 +42,7 @@ class Profile extends Component {
 
   render() {
     if (this.state.loading) {
-      return <Loading />
+      return <Loading />;
     }
 
     return (
@@ -51,8 +54,13 @@ class Profile extends Component {
         <section id="profile" className={styles.main}>
           <fieldset className={styles.field}>
             <legend>Basic info</legend>
-            <label>Email:</label>
-            <input type="email" value={this.state.user.email} disabled />
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              value={this.state.user.email}
+              disabled
+            />
           </fieldset>
 
           <fieldset className={styles.field}>
@@ -74,6 +82,13 @@ class Profile extends Component {
     );
   }
 }
+
+
+Profile.propTypes = {
+  params: PropTypes.shape({
+    id: PropTypes.string,
+  }),
+};
 
 
 export default Profile;

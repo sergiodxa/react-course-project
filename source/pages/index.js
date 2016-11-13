@@ -1,2 +1,3 @@
-import Pages from './containers/Pages.jsx';
+import Pages from './containers/Pages';
+
 export default Pages;

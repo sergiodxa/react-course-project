@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 import styles from './Title.css';
 
@@ -10,6 +10,10 @@ function Title(props) {
     </h2>
   );
 }
+
+Title.propTypes = {
+  children: PropTypes.node,
+};
 
 
 export default Title;

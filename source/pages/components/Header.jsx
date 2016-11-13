@@ -18,6 +18,7 @@ const header = (
         href="https://github.com/sergiodxa/react-course-project"
         className={styles.link}
         target="_blank"
+        rel="noopener noreferrer"
       >
         Github
       </a>
