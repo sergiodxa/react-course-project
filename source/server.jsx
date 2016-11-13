@@ -10,6 +10,12 @@ import layout from './layout.html';
 
 import messages from './messages.json';
 
+
+const domain = process.env.NODE_ENV === 'production'
+  ? 'https://platzi-react-sfs.now.sh'
+  : 'http://localhost:3001';
+
+
 function requestHandler(request, response) {
   const locale = request.headers['accept-language'].indexOf('es') >= 0 ? 'es' : 'en';
   const context = createServerRenderContext();
@@ -46,7 +52,7 @@ function requestHandler(request, response) {
   }
 
   response.write(
-    layout({ content: html, title: 'Aplicación' }),
+    layout({ content: html, title: 'Aplicación', domain }),
   );
 
   return response.end();

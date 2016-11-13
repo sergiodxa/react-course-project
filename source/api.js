@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
 
-const baseUrl = 'http://jsonplaceholder.typicode.com';
+const baseUrl = 'https://jsonplaceholder.typicode.com';
 
 
 const api = {
