@@ -9,6 +9,7 @@
     "header.nav.home": "Inicio",
     "header.nav.repo": "Repositorio",
     "comment.meta.author": "Por: <a href=\"mailto:{email}\" target=\"_blank\">{name}</a>",
+    "post.meta.comment": "1 comentario",
     "post.meta.comments": "{amount} comentarios",
     "post.meta.readMore": "Leer más...",
     "loading": "Cargando..."
@@ -23,6 +24,7 @@
     "header.nav.home": "Home",
     "header.nav.repo": "Repository",
     "comment.meta.author": "By: <a href=\"mailto:{email}\" target=\"_blank\">{name}</a>",
+    "post.meta.comment": "1 comment",
     "post.meta.comments": "{amount} comments",
     "post.meta.readMore": "Read more...",
     "loading": "Loading..."

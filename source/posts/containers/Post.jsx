@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, FormattedPlural } from 'react-intl';
 
 import styles from './Post.css';
 
@@ -57,11 +57,17 @@ class Post extends Component {
               {this.state.user.name}
             </Link>
             <Link to={`/post/${this.props.id}#comments`} className={styles.comments}>
-              <FormattedMessage
-                id="post.meta.comments"
-                values={{
-                  amount: this.state.comments.length,
-                }}
+              <FormattedPlural
+                value={this.state.comments.length}
+                one={
+                  <FormattedMessage id="post.meta.comment" />
+                }
+                other={
+                  <FormattedMessage
+                    id="post.meta.comments"
+                    values={{ amount: this.state.comments.length }}
+                  />
+                }
               />
             </Link>
 
