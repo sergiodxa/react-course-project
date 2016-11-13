@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import Post from '../../posts/containers/Post';
 import Loading from '../../shared/components/Loading';
@@ -75,7 +76,7 @@ class Home extends Component {
     return (
       <section name="home" className={styles.section}>
         <Title>
-          Home
+          <FormattedMessage id="title.home" />
         </Title>
 
         <section className={styles.list}>

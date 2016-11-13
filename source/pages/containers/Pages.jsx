@@ -6,13 +6,13 @@ import Post from './Post';
 import Profile from './Profile';
 import Error404 from './Error404';
 
-import header from '../components/Header';
+import Header from '../components/Header';
 
 
 function Pages() {
   return (
     <main role="application">
-      {header}
+      <Header />
 
       {/* Lista de artículos */}
       <Match
