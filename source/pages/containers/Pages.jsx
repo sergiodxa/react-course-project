@@ -6,10 +6,14 @@ import Post from './Post.jsx';
 import Profile from './Profile.jsx';
 import Error404 from './Error404.jsx';
 
+import header from '../components/Header.jsx';
+
 
 function Pages() {
   return (
     <main role="applcation">
+      {header}
+
       {/* Lista de artículos */}
       <Match
         pattern="/"
