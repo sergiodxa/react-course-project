@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import Post from '../../posts/containers/Post';
@@ -7,8 +8,6 @@ import Loading from '../../shared/components/Loading';
 import Title from '../../shared/components/Title';
 
 import styles from './Page.css';
-
-import api from '../../api';
 
 import actions from '../../actions';
 
@@ -28,6 +27,9 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    if (this.props.posts.length === 0) {
+      this.props.actions.postsNextPage();
+    }
     this.initialFetch();
     window.addEventListener('scroll', this.handleScroll);
   }
@@ -37,19 +39,7 @@ class Home extends Component {
   }
 
   async initialFetch() {
-    if (this.props.posts.length > 0) {
-      this.setState({
-        loading: false,
-      });
-      return;
-    }
-
-    const posts = await api.posts.getList(this.props.page);
-
-    this.props.dispatch(actions.setPost(posts));
-
     this.setState({
-      posts,
       loading: false,
     });
   }
@@ -67,10 +57,7 @@ class Home extends Component {
 
     return this.setState({ loading: true }, async () => {
       try {
-        const posts = await api.posts.getList(this.props.page);
-
-        this.props.dispatch(actions.setPost(posts));
-
+        this.props.actions.postsNextPage();
         this.setState({
           loading: false,
           error: null,
@@ -113,18 +100,21 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  dispatch: PropTypes.func,
-  page: PropTypes.number,
+  actions: PropTypes.objectOf(PropTypes.func),
   posts: PropTypes.arrayOf(PropTypes.object),
 };
 
 
 function mapStateToProps(state) {
   return {
-    page: state.posts.page,
     posts: state.posts.entities,
   };
 }
 
 
-export default connect(mapStateToProps)(Home);
+function mapDispatchToProps(dispatch) {
+  return { actions: bindActionCreators(actions, dispatch) };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
