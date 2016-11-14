@@ -40,10 +40,19 @@ const config = {
         loader: 'babel',
         exclude: /(node_modules)/,
         query: {
-          presets: ['latest-minimal', 'react'],
+          presets: ['react'],
           env: {
             production: {
-              plugins: ['transform-regenerator', 'transform-runtime'],
+              plugins: [
+                'transform-regenerator',
+                'transform-runtime',
+                'transform-react-constant-elements',
+                'transform-react-inline-elements',
+                'transform-minify-booleans',
+                'transform-remove-console',
+                'transform-remove-debugger',
+                'transform-undefined-to-void',
+              ],
               presets: ['es2015'],
             },
             development: {
