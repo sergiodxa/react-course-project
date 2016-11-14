@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
 
 import Post from '../../posts/containers/Post';
 import Loading from '../../shared/components/Loading';
@@ -8,6 +9,8 @@ import Title from '../../shared/components/Title';
 import styles from './Page.css';
 
 import api from '../../api';
+
+import actions from '../../actions';
 
 
 class Home extends Component {
@@ -34,10 +37,19 @@ class Home extends Component {
   }
 
   async initialFetch() {
-    const posts = await api.posts.getList(this.state.page);
+    if (this.props.posts.length > 0) {
+      this.setState({
+        loading: false,
+      });
+      return;
+    }
+
+    const posts = await api.posts.getList(this.props.page);
+
+    this.props.dispatch(actions.setPost(posts));
+
     this.setState({
       posts,
-      page: this.state.page + 1,
       loading: false,
     });
   }
@@ -55,11 +67,11 @@ class Home extends Component {
 
     return this.setState({ loading: true }, async () => {
       try {
-        const posts = await api.posts.getList(this.state.page);
+        const posts = await api.posts.getList(this.props.page);
+
+        this.props.dispatch(actions.setPost(posts));
 
         this.setState({
-          posts: this.state.posts.concat(posts),
-          page: this.state.page + 1,
           loading: false,
           error: null,
         });
@@ -80,8 +92,13 @@ class Home extends Component {
         </Title>
 
         <section className={styles.list}>
-          {this.state.posts
-            .map(post => <Post key={post.id} {...post} />)
+          {this.props.posts
+            .map(post => (
+              <Post
+                key={post.id}
+                {...post}
+              />
+            ))
           }
           {this.state.loading && (
             <Loading />
@@ -95,5 +112,19 @@ class Home extends Component {
   }
 }
 
+Home.propTypes = {
+  dispatch: PropTypes.func,
+  page: PropTypes.number,
+  posts: PropTypes.arrayOf(PropTypes.object),
+};
 
-export default Home;
+
+function mapStateToProps(state) {
+  return {
+    page: state.posts.page,
+    posts: state.posts.entities,
+  };
+}
+
+
+export default connect(mapStateToProps)(Home);
