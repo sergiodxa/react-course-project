@@ -28,11 +28,13 @@ function setUser(user) {
 function postsNextPage() {
   return async (dispatch, getState) => {
     const state = getState();
-    const currentPage = state.posts.page;
+    const currentPage = state.get('posts').get('page');
 
     const posts = await api.posts.getList(currentPage);
 
     dispatch(setPost(posts));
+
+    return posts;
   };
 }
 
@@ -41,6 +43,7 @@ function loadCommentsForPost(postId) {
   return async (dispatch) => {
     const comments = await api.posts.getComments(postId);
     dispatch(setComments(comments));
+    return comments;
   };
 }
 
@@ -49,6 +52,7 @@ function loadUser(userId) {
   return async (dispatch) => {
     const user = await api.users.getSingle(userId);
     dispatch(setUser(user));
+    return user;
   };
 }
 

@@ -18,17 +18,15 @@ class Home extends Component {
 
     this.state = {
       loading: true,
-      posts: [],
-      page: 1,
       error: null,
     };
 
     this.handleScroll = this.handleScroll.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.posts.length === 0) {
-      this.props.actions.postsNextPage();
+  async componentDidMount() {
+    if (this.props.posts.size === 0) {
+      await this.props.actions.postsNextPage();
     }
     this.initialFetch();
     window.addEventListener('scroll', this.handleScroll);
@@ -57,7 +55,7 @@ class Home extends Component {
 
     return this.setState({ loading: true }, async () => {
       try {
-        this.props.actions.postsNextPage();
+        await this.props.actions.postsNextPage();
         this.setState({
           loading: false,
           error: null,
@@ -82,10 +80,10 @@ class Home extends Component {
           {this.props.posts
             .map(post => (
               <Post
-                key={post.id}
-                {...post}
+                key={post.get('id')}
+                {...post.toJS()}
               />
-            ))
+            )).toArray()
           }
           {this.state.loading && (
             <Loading />
@@ -101,13 +99,13 @@ class Home extends Component {
 
 Home.propTypes = {
   actions: PropTypes.objectOf(PropTypes.func),
-  posts: PropTypes.arrayOf(PropTypes.object),
+  posts: PropTypes.objectOf(PropTypes.object),
 };
 
 
 function mapStateToProps(state) {
   return {
-    posts: state.posts.entities,
+    posts: state.get('posts').get('entities'),
   };
 }
 
