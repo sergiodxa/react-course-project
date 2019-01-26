@@ -3,6 +3,10 @@ Proyecto para el curso de React.js
 
 > Este repositorio no es 100% el mismo código del curso y no tiene actualizado React Router (ni ninguna otra librería) ni pruebas automatizadas.
 
+<a href="https://www.patreon.com/sergiodxa">
+	<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" width="160">
+</a>
+
 ## Cómo correrlo en desarrollo:
 1. Instalar dependencias con `npm install`
 2. Correr Webpack con `npm run watch`
